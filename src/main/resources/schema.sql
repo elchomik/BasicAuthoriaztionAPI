@@ -1,0 +1,32 @@
+CREATE TABLE Klient(
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+wypozyczalnia_id BIGINT NOT NULL,
+imie VARCHAR(30) NOT NULL,
+nazwisko VARCHAR(30) NOT NULL,
+pesel VARCHAR(12) NOT NULL,
+wiek NUMERIC(4) NOT NULL
+);
+
+CREATE TABLE Samochod(
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+wypozyczalnia_id BIGINT NOT NULL,
+nazwa VARCHAR(30) NOT NULL,
+model VARCHAR(30) NOT NULL,
+marka VARCHAR(30) NOT NULL,
+przebieg NUMERIC(7,2) NOT NULL,
+rok NUMERIC(4) NOT NULL
+);
+
+CREATE TABLE Wypozyczalnia(
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+nazwa VARCHAR(30) NOT NULL,
+ulica VARCHAR(30) NOT NULL,
+miasto VARCHAR(30) NOT NULL,
+wlasciciel VARCHAR(30) NOT NULL
+);
+
+ALTER TABLE Samochod ADD CONSTRAINT samochod_wypozyczalnia_FK FOREIGN  KEY(wypozyczalnia_id)
+REFERENCES Wypozyczalnia(id);
+
+ALTER TABLE Klient ADD CONSTRAINT klient_wypozyczalnia_FK FOREIGN KEY(wypozyczalnia_id)
+REFERENCES Wypozyczalnia(id);
